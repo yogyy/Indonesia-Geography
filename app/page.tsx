@@ -22,7 +22,7 @@ export default async function Home() {
       ))} */}
       <div className="relative flex items-center justify-center border-red-600">
         <Suspense fallback={<div>please wait...</div>}>
-          <MapIndo geoUrl={geoUrl} />
+          <MapIndo center={[117, -4]} zoom={6} geoUrl={geoUrl} maxZoom={30} />
         </Suspense>
         {/* <Image className="object-contain map" fill src={map} alt="" /> */}
       </div>
