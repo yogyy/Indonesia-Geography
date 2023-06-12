@@ -1,10 +1,6 @@
 {
   "provinsi": [
-    {
-      "code": "11",
-      "province": "Aceh (NAD)",
-      "topojson": "https://raw.githubusercontent.com/ghapsara/indonesia-atlas/master/kabupaten-kota/Aceh/aceh-simplified-topo.json"
-    },
+    { "code": "11", "province": "Aceh (NAD)" },
     { "code": "12", "province": "Sumatera Utara" },
     { "code": "13", "province": "Sumatera Barat" },
     { "code": "14", "province": "Riau" },

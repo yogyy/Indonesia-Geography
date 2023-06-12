@@ -1,42 +1,23 @@
-'use client';
-
-import { atom, useAtom } from 'jotai';
+import { ComboboxDemo } from '@/components/client/combobox';
+// import { atom, useAtom } from 'jotai';
 import Link from 'next/link';
+import { Suspense } from 'react';
+import { NavLink } from './comp/nav-link';
 
-export const nameAtom = atom({ provinsi: 'Province', kabupaten: 'Regency', kecamatan: 'District' });
+// export const nameAtom = atom({ provinsi: 'Province', kabupaten: 'Regency', kecamatan: 'District' });
 
-export default function Navbar() {
-  const [name] = useAtom(nameAtom);
-  const navbar = [
-    {
-      name: 'Home',
-      link: '/',
-    },
-    {
-      name: name.provinsi,
-      link: '/provinsi',
-    },
-    {
-      name: name.kabupaten,
-      link: '/kabupaten',
-    },
-    {
-      name: name.kecamatan,
-      link: '/kecamatan',
-    },
-  ];
+interface Provinsi {
+  code: string;
+  province: string;
+}
 
+export default async function Navbar() {
   return (
-    <header className="sticky">
-      <nav>
-        <ul className="flex items-center w-full h-11 bg-sky-600">
-          {navbar.map(nav => (
-            <li key={nav.link}>
-              <Link className="px-3 py-1.5 mx-2 rounded-sm w-fit bg-primary" href={nav.link}>
-                {nav.name}
-              </Link>
-            </li>
-          ))}
+    <header className="">
+      <nav className="">
+        <ul className="flex items-center h-full bg-emerald-700 py-2">
+          <NavLink />
+          <li className="relative"></li>
         </ul>
       </nav>
     </header>

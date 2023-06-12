@@ -1,35 +1,33 @@
 'use client';
 
 import { DialogButton } from '@/components/client/dialog-btn';
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useDebounce } from '@/hooks/use-debounce';
 import axios from 'axios';
 import * as React from 'react';
 
-interface Kabupaten {
+interface Kecamatan {
   code: string;
-  province: string;
-  regency: string;
+  district: string;
   type: string;
 }
 
-const SearchKab = () => {
+const SearchKec = () => {
   const [query, setQuery] = React.useState('');
-  const [searchResults, setSearchResults] = React.useState<Kabupaten[]>([]);
+  const [searchResults, setSearchResults] = React.useState<Kecamatan[]>([]);
   const debouncedValue = useDebounce<string>(query, 500);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
   };
 
-  const searchMovies = React.useCallback(async (query: string) => {
+  const searchKecamatan = React.useCallback(async (query: string) => {
     if (query.trim() === '') {
       setSearchResults([]);
       return;
     }
     if (query.length >= 3) {
-      const { data: response } = await axios.get(`/api/kabupaten?name=${query}`);
+      const { data: response } = await axios.get(`/api/kecamatan?name=${query}`);
       setSearchResults(response.data);
     } else {
       setSearchResults([]);
@@ -38,9 +36,9 @@ const SearchKab = () => {
 
   React.useEffect(() => {
     if (debouncedValue) {
-      searchMovies(debouncedValue);
+      searchKecamatan(debouncedValue);
     }
-  }, [debouncedValue, searchMovies]);
+  }, [debouncedValue, searchKecamatan]);
 
   return (
     <div className="flex flex-col w-[900px] space-x-3 mx-auto">
@@ -49,19 +47,19 @@ const SearchKab = () => {
           className="w-1/2 focus-visible:ring-offset-sky-500"
           value={query}
           onChange={handleInputChange}
-          placeholder="search kabupaten..."
+          placeholder="search kecamatan..."
         />
       </div>
       <div className="flex flex-wrap gap-2 mt-2">
         {searchResults.map(result => (
           <DialogButton
-            key={result.province + result.code}
+            key={result.district + result.code}
             action={false}
             desc={<pre>{JSON.stringify(result, null, 2)}</pre>}
             cancel="cancel"
             title="Details:"
           >
-            {result.regency}
+            {result.district}
           </DialogButton>
         ))}
       </div>
@@ -69,4 +67,4 @@ const SearchKab = () => {
   );
 };
 
-export { SearchKab };
+export { SearchKec };

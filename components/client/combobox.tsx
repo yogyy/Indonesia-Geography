@@ -1,22 +1,59 @@
 'use client';
 
-import { DialogButton } from '@/components/client/dialog-btn';
+import * as React from 'react';
+import { Check, ChevronsUpDown } from 'lucide-react';
+
+import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+} from '@/components/ui/command';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useSearch } from '@/hooks/useSearch';
+import { Input } from '../ui/input';
+import { DialogButton } from './dialog-btn';
 import { useDebounce } from '@/hooks/use-debounce';
 import axios from 'axios';
-import * as React from 'react';
 
-interface Kabupaten {
+const frameworks = [
+  {
+    value: 'next.js',
+    label: 'Next.js',
+  },
+  {
+    value: 'sveltekit',
+    label: 'SvelteKit',
+  },
+  {
+    value: 'nuxt.js',
+    label: 'Nuxt.js',
+  },
+  {
+    value: 'remix',
+    label: 'Remix',
+  },
+  {
+    value: 'astro',
+    label: 'Astro',
+  },
+];
+
+interface Provinsi {
   code: string;
   province: string;
   regency: string;
-  type: string;
+  district: string;
 }
 
-const SearchKab = () => {
+export function ComboboxDemo({ frameworks }: any) {
   const [query, setQuery] = React.useState('');
-  const [searchResults, setSearchResults] = React.useState<Kabupaten[]>([]);
+  const [searchResults, setSearchResults] = React.useState<Provinsi[]>([]);
   const debouncedValue = useDebounce<string>(query, 500);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,7 +66,7 @@ const SearchKab = () => {
       return;
     }
     if (query.length >= 3) {
-      const { data: response } = await axios.get(`/api/kabupaten?name=${query}`);
+      const { data: response } = await axios.get(`/api/provinsi?name=${query}`);
       setSearchResults(response.data);
     } else {
       setSearchResults([]);
@@ -49,11 +86,11 @@ const SearchKab = () => {
           className="w-1/2 focus-visible:ring-offset-sky-500"
           value={query}
           onChange={handleInputChange}
-          placeholder="search kabupaten..."
+          placeholder="search provinsi..."
         />
       </div>
       <div className="flex flex-wrap gap-2 mt-2">
-        {searchResults.map(result => (
+        {searchResults.map((result: Provinsi) => (
           <DialogButton
             key={result.province + result.code}
             action={false}
@@ -61,12 +98,10 @@ const SearchKab = () => {
             cancel="cancel"
             title="Details:"
           >
-            {result.regency}
+            {result.province}
           </DialogButton>
         ))}
       </div>
     </div>
   );
-};
-
-export { SearchKab };
+}

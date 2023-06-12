@@ -2,7 +2,8 @@ import { Metadata } from 'next';
 import { Pokedex } from '../client';
 import { MapIndo } from '@/components/client/map';
 import { Suspense } from 'react';
-import topojson from '@/components/nusantara-provinsi.json';
+import topojson from '@/components/topojson/kabupaten-kota/All/aceh-simplified-topo.json';
+import { provinsi } from '@/components/nusantara';
 
 type Params = {
   params: {
@@ -11,7 +12,7 @@ type Params = {
 };
 
 interface Province {
-  topojson: any;
+  topojson?: any;
   code: number;
   province: string;
 }
@@ -35,17 +36,21 @@ export async function generateMetadata({ params: { id } }: Params): Promise<Meta
 }
 
 export default async function Testing({ params: { id } }: Params) {
-  const json = topojson;
-  console.log(json);
-
-  const ProvinceData: Promise<Province> = getProvince(id);
-  const data = await ProvinceData;
+  const geoUrl = provinsi.find(item => item.code === id);
+  // console.log(geoUrl);
   return (
     <div className="flex flex-col w-full">
-      <Pokedex province={data} />
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+      {/* <Pokedex province={data} /> */}
+      {/* <pre className="absolute top-40">{JSON.stringify(data, null, 2)}</pre> */}
       <Suspense fallback={<div>please wait...</div>}>
-        {/* <MapIndo geoUrl={json.provinsi.} /> */}
+        <MapIndo
+          topage={false}
+          center={geoUrl?.center || [0, 0]}
+          zoom={25}
+          geoUrl={geoUrl?.topojson}
+          maxZoom={60}
+          scale={geoUrl?.scale}
+        />
       </Suspense>
     </div>
   );
