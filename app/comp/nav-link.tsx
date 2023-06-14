@@ -33,7 +33,7 @@ export const NavLink = () => {
         <li key={nav.link}>
           <Link
             className={cn(
-              'px-3 py-1.5 mx-2 rounded-sm w-fit bg-green-600 hover:bg-green-600/50 font-semibold',
+              'px-1.5 py-0.5 text-sm md:text-base md:px-3 md:py-1.5 mx-2 rounded-sm w-fit bg-green-600 hover:bg-green-600/50 font-semibold',
               pathname === nav.link ? 'bg-sky-600' : ''
             )}
             href={nav.link}

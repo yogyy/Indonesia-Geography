@@ -1,19 +1,33 @@
-import * as React from 'react';
-import { useDebounce } from './use-debounce';
-import axios from 'axios';
+'use client';
 
-export function useSearch(url: string) {
+import axios from 'axios';
+import React from 'react';
+import { useDebounce } from './use-debounce';
+
+export interface Wilayah {
+  code: string;
+  province: string;
+  regency: string;
+  district: string;
+  type?: string;
+}
+
+export function useSearchWilayah(wilayah: string) {
   const [query, setQuery] = React.useState('');
-  const [searchResults, setSearchResults] = React.useState([]);
+  const [searchResults, setSearchResults] = React.useState<Wilayah[]>([]);
   const debouncedValue = useDebounce<string>(query, 500);
 
-  const searchUrl = React.useCallback(async (query: string) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery(e.target.value);
+  };
+
+  const searchKabupaten = React.useCallback(async (query: string) => {
     if (query.trim() === '') {
       setSearchResults([]);
       return;
     }
     if (query.length >= 3) {
-      const { data: response } = await axios.get(url);
+      const { data: response } = await axios.get(`${wilayah}?name=${query}`);
       setSearchResults(response.data);
     } else {
       setSearchResults([]);
@@ -22,9 +36,9 @@ export function useSearch(url: string) {
 
   React.useEffect(() => {
     if (debouncedValue) {
-      searchUrl(debouncedValue);
+      searchKabupaten(debouncedValue);
     }
-  }, [debouncedValue, searchUrl]);
+  }, [debouncedValue, searchKabupaten]);
 
-  return { query, setQuery, searchResults, debouncedValue };
+  return { query, handleInputChange, searchResults };
 }

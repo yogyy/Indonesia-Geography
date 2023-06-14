@@ -15,34 +15,11 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useSearch } from '@/hooks/useSearch';
+import { useSearchWilayah } from '@/hooks/useSearch';
 import { Input } from '../ui/input';
 import { DialogButton } from './dialog-btn';
 import { useDebounce } from '@/hooks/use-debounce';
 import axios from 'axios';
-
-const frameworks = [
-  {
-    value: 'next.js',
-    label: 'Next.js',
-  },
-  {
-    value: 'sveltekit',
-    label: 'SvelteKit',
-  },
-  {
-    value: 'nuxt.js',
-    label: 'Nuxt.js',
-  },
-  {
-    value: 'remix',
-    label: 'Remix',
-  },
-  {
-    value: 'astro',
-    label: 'Astro',
-  },
-];
 
 interface Provinsi {
   code: string;
@@ -80,10 +57,10 @@ export function ComboboxDemo({ frameworks }: any) {
   }, [debouncedValue, searchMovies]);
 
   return (
-    <div className="flex flex-col w-[900px] space-x-3 mx-auto">
+    <div className="flex flex-col max-w-[900px] space-x-3 mx-auto">
       <div className="flex justify-center">
         <Input
-          className="w-1/2 focus-visible:ring-offset-sky-500"
+          className="w-1/2 focus-visible:ring-offset-sky-500 min-w-[150px]"
           value={query}
           onChange={handleInputChange}
           placeholder="search provinsi..."
