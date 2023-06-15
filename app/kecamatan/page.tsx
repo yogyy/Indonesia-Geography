@@ -1,5 +1,3 @@
-import Link from 'next/link';
-import axios from 'axios';
 import { SearchKec } from '@/components/client/searchname';
 
 export default async function Kecamatan() {

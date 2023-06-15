@@ -1,5 +1,3 @@
-import Link from 'next/link';
-import axios from 'axios';
 import { SearchKab } from '@/components/client/searchname';
 
 export default async function Kabupaten() {

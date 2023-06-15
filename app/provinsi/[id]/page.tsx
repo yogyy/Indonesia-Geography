@@ -1,8 +1,6 @@
 import { Metadata } from 'next';
-import { Pokedex } from '../client';
 import { MapIndo } from '@/components/client/map';
 import { Suspense } from 'react';
-import topojson from '@/components/topojson/kabupaten-kota/All/aceh-simplified-topo.json';
 import { provinsi } from '@/components/nusantara';
 
 type Params = {
@@ -19,7 +17,6 @@ interface Province {
 
 async function getProvince(id: string) {
   const res = await fetch(`https://api.wilayah-nusantara.id/provinsi/${id}`);
-
   if (!res.ok) throw new Error('failed to fetch Province');
 
   return res.json();
@@ -30,18 +27,15 @@ export async function generateMetadata({ params: { id } }: Params): Promise<Meta
   const data = await ProvinceData;
 
   return {
-    title: `Province ${data.province}`,
+    title: `${data.province} Province`,
     description: `This is the page of province ${data.province}`,
   };
 }
 
 export default async function Testing({ params: { id } }: Params) {
   const geoUrl = provinsi.find(item => item.code === id);
-  // console.log(geoUrl);
   return (
     <div className="flex flex-col w-full">
-      {/* <Pokedex province={data} /> */}
-      {/* <pre className="absolute top-40">{JSON.stringify(data, null, 2)}</pre> */}
       <Suspense fallback={<div>please wait...</div>}>
         <MapIndo
           topage={false}
