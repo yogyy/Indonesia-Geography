@@ -1,10 +1,11 @@
 'use client';
 
+import { SheetClose } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import React from 'react';
-const navbar = [
+export const navbar = [
   {
     name: 'Home',
     link: '/',
@@ -25,7 +26,7 @@ const navbar = [
     link: '/kecamatan',
   },
 ];
-export const NavLink = () => {
+const NavLink = () => {
   const pathname = usePathname();
   return (
     <>
@@ -33,8 +34,8 @@ export const NavLink = () => {
         <li key={nav.link}>
           <Link
             className={cn(
-              'px-1.5 py-0.5 text-sm md:text-base md:px-3 md:py-1.5 mx-2 rounded-sm w-fit bg-green-600 hover:bg-green-600/50 font-semibold',
-              pathname === nav.link ? 'bg-sky-600' : ''
+              'text-base px-3 py-1.5 mx-2 rounded-sm w-fit font-semibold items-start flex justify-center',
+              pathname === nav.link ? 'text-sky-600' : ''
             )}
             href={nav.link}
           >
@@ -45,3 +46,27 @@ export const NavLink = () => {
     </>
   );
 };
+
+const SideNavLink = () => {
+  const pathname = usePathname();
+  const r = useRouter();
+  return (
+    <>
+      {navbar.map(nav => (
+        <li key={nav.link}>
+          <SheetClose
+            className={cn(
+              'text-base px-3 py-1.5 mx-2 rounded-sm w-fit font-semibold items-start flex hover:text-green-800',
+              pathname === nav.link ? 'text-green-600' : ''
+            )}
+            onClick={() => r.push(nav.link)}
+          >
+            {nav.name}
+          </SheetClose>
+        </li>
+      ))}
+    </>
+  );
+};
+
+export { NavLink, SideNavLink };
