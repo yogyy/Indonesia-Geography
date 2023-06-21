@@ -1,12 +1,9 @@
-import Image from 'next/image';
 import { Suspense } from 'react';
 import Loading from '@/components/client/loader';
 import { UnsplashImage } from '@/app/models/unsplash-image';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { Terminal } from 'lucide-react';
 import Link from 'next/link';
-import { CButton } from '@/components/client/client-button';
-
+import { NavMenu } from '@/components/client/nav-menu';
+import { NextImage } from '@/components/client/NextImage';
 export const metadata = {
   title: 'Incremental Static Regeneration Fetching - Next JS 13.4 Image',
 };
@@ -25,23 +22,24 @@ export default async function Page() {
   const width = Math.min(500, image.width);
   const height = (width / image.width) * image.height;
   return (
-    <div className="flex flex-col items-center">
-      <Suspense fallback={<Loading className="w-screen h-screen" />}>
-        <Image
-          src={image.urls.regular}
-          alt={image.description || 'Unsplash Image'}
-          width={width}
-          height={height}
-          className="h-full max-w-full rounded"
-        />
-        <p className="hover:underline text-blue-50">
+    <div className="flex flex-col items-center justify-normal">
+      <div className="flex flex-col items-center max-w-5xl gap-3 py-4">
+        <NavMenu />
+        <p className="text-blue-500 hover:underline">
           by&nbsp;
-          <Link target="_blank" href={`https://unsplash.com/@${image.user.username}`}>
-            {image.user.username}
-          </Link>
+          <Link href={`/user/${image.user.username}`}>{image.user.username}</Link>
         </p>
-        <CButton data={image}>console this</CButton>
-      </Suspense>
+      </div>
+      <div className="flex flex-col items-center">
+        <Suspense fallback={<Loading className="w-screen h-screen" />}>
+          <NextImage
+            src={image.urls.regular}
+            alt={image.description || image.alt_description}
+            width={width}
+            height={height}
+          />
+        </Suspense>
+      </div>
     </div>
   );
 }

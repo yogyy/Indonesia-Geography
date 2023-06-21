@@ -1,9 +1,9 @@
-import Image from 'next/image';
 import { Suspense } from 'react';
 import Loading from '@/components/client/loader';
 import { UnsplashImage } from '@/app/models/unsplash-image';
-
 import Link from 'next/link';
+import { NextImage } from '@/components/client/NextImage';
+import { NavMenu } from '@/components/client/nav-menu';
 
 export const metadata = {
   title: 'Dynamic Fetching - Next JS 13.4 Image',
@@ -25,20 +25,20 @@ export default async function Page() {
   const height = (width / image.width) * image.height;
   return (
     <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center max-w-5xl gap-3 py-4">
+        <NavMenu />
+        <p className="text-blue-500 hover:underline">
+          by&nbsp;
+          <Link href={`/user/${image.user.username}`}>{image.user.username}</Link>
+        </p>
+      </div>
       <Suspense fallback={<Loading className="w-screen h-screen" />}>
-        <Image
+        <NextImage
           src={image.urls.regular}
-          alt={image.description}
+          alt={image.description || image.alt_description}
           width={width}
           height={height}
-          className="h-full max-w-full rounded"
         />
-        <p className="hover:underline text-blue-50">
-          by&nbsp;
-          <Link target="_blank" href={`https://unsplash.com/@${image.user.username}`}>
-            {image.user.username}
-          </Link>
-        </p>
       </Suspense>
     </div>
   );
