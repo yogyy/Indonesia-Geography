@@ -7,13 +7,13 @@ interface IMenuContext {
   setData: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const MyContext = React.createContext<IMenuContext>({
-  data: 'apaan coek',
+export const MyContext = React.createContext<IMenuContext>({
+  data: '',
   setData: () => {},
 });
 
 export const MyContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const [data, setData] = React.useState('');
+  const [data, setData] = React.useState('dadad');
   return <MyContext.Provider value={{ data, setData }}>{children}</MyContext.Provider>;
 };
 

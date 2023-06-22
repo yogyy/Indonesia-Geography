@@ -25,7 +25,7 @@ const SearchName = ({ query, handleInputChange, searchResults, placeholder }: Se
     <div className="flex flex-col max-w-[900px] space-x-3 mx-auto">
       <div className="flex justify-center mt-7">
         <Input
-          className="w-1/2 focus-visible:ring-offset-sky-500 min-w-[150px]"
+          className="w-1/2 focus-visible:ring-0 outline-sky-600 min-w-[150px]"
           value={query}
           onChange={handleInputChange}
           placeholder={placeholder}
@@ -76,14 +76,12 @@ const SearchKec = () => {
   const { handleInputChange, query, searchResults } = useSearchWilayah('/api/kecamatan');
 
   return (
-    <>
-      <SearchName
-        placeholder="search kecamatan..."
-        query={query}
-        searchResults={searchResults}
-        handleInputChange={handleInputChange}
-      />
-    </>
+    <SearchName
+      placeholder="search kecamatan..."
+      query={query}
+      searchResults={searchResults}
+      handleInputChange={handleInputChange}
+    />
   );
 };
 

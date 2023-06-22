@@ -7,11 +7,10 @@ export interface Province {
   code: string;
 }
 export default async function SideNavLayout({ children }: { children: React.ReactNode }) {
-  // console.log(provinsi);
   const { provinsi: provi } = provinsi;
   return (
     <div className="flex">
-      <aside className="min-h-screen min-w-max bg-emerald-700 hidden md:block">
+      <aside className="hidden min-h-screen min-w-max bg-emerald-700 md:block">
         <ul>
           {provi.map((prov: Province) => (
             <li className="px-2" key={prov.code}>

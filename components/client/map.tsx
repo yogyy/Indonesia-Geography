@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { ComposableMap, Geographies, Geography, Marker, ZoomableGroup } from 'react-simple-maps';
+import { ComposableMap, Geographies, Geography, ZoomableGroup } from 'react-simple-maps';
 import { Tooltip } from 'react-tooltip';
 // import 'react-tooltip/dist/react-tooltip.css';
 
@@ -27,7 +27,7 @@ export const MapIndo = ({ geoUrl, scale, zoom, maxZoom, center, topage }: Map) =
       <ComposableMap
         projection="geoMercator"
         projectionConfig={{ scale: scale, center: center }}
-        className="h-screen w-full border-red-600"
+        className="w-full h-screen z-[5]"
       >
         <ZoomableGroup zoom={zoom} maxZoom={maxZoom} center={center}>
           <Geographies geography={geoUrl}>
@@ -50,7 +50,6 @@ export const MapIndo = ({ geoUrl, scale, zoom, maxZoom, center, topage }: Map) =
                     data-tooltip-place="top"
                     data-tooltip-delay-show={600}
                     aria-label={geo.properties.provinsi}
-                    onClick={() => console.log(geo.properties)}
                     className={cn(
                       'outline-none border-none hover:opacity-70 fill-green-700 transition-all duration-300',
                       geo.properties.kabkot
