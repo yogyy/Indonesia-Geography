@@ -1,20 +1,9 @@
 'use client';
 import { Button } from '@/components/ui/button';
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/components/ui/sheet';
-import { cn } from '@/lib/utils';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { AlignJustify, AlignLeft } from 'lucide-react';
 import React from 'react';
 import { SideNavLink } from './nav-link';
-import { NavMenu } from '@/components/client/nav-menu';
 
 export function SheetDemo() {
   const [isHovered, setIsHovered] = React.useState(false);
