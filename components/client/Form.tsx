@@ -42,12 +42,7 @@ export function ProfileForm({ label, placeholder, desc }: ProfileFormProps) {
   function onSubmit(e: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    const formData = new FormData(e.target as HTMLFormElement);
-    const query = formData.get('query')?.toString().trim();
-
-    if (query) {
-      alert(query);
-    }
+    console.log(e);
   }
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
