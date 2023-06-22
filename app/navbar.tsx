@@ -1,6 +1,5 @@
 import { NavLink } from './comp/nav-link';
 import { SheetDemo } from './comp/hamburger';
-import { NavMenu } from '@/components/client/nav-menu';
 
 export default async function Navbar() {
   return (

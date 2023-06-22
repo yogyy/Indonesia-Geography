@@ -1,6 +1,5 @@
 'use client';
 
-import { NavMenu } from '@/components/client/nav-menu';
 import { SheetClose } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
@@ -25,11 +24,6 @@ export const navbar = [
     // name: name.kecamatan,
     name: 'Kecamatan',
     link: '/kecamatan',
-  },
-  {
-    // name: name.kecamatan,
-    name: 'Galeri',
-    link: '/gallery',
   },
 ];
 const NavLink = () => {
