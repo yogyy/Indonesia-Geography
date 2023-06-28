@@ -54,7 +54,7 @@ const SearchProv = () => {
     <SearchName
       handleInputChange={handleInputChange}
       query={query}
-      placeholder="search kabupaten..."
+      placeholder="search provinsi..."
       searchResults={searchResults}
     />
   );
