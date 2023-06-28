@@ -4,7 +4,7 @@ import { SheetDemo } from './comp/hamburger';
 export default async function Navbar() {
   return (
     <header className="">
-      <nav className="flex items-center justify-center sm:px-10">
+      <nav className="flex items-center justify-center border-b sm:px-10">
         <div className="block sm:hidden">
           <SheetDemo />
         </div>
