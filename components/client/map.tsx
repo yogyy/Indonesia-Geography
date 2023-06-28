@@ -27,7 +27,7 @@ export const MapIndo = ({ geoUrl, scale, zoom, maxZoom, center, topage }: Map) =
       <ComposableMap
         projection="geoMercator"
         projectionConfig={{ scale: scale, center: center }}
-        className="w-full h-screen z-[5]"
+        className="w-full h-screen"
       >
         <ZoomableGroup zoom={zoom} maxZoom={maxZoom} center={center}>
           <Geographies geography={geoUrl}>
